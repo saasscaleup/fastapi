@@ -9,9 +9,14 @@ DATABASE_FILE = "data.json"
 
 # Define a Pydantic model for your data
 class Item(BaseModel):
-    name: str
+    channel: str
     description: str = None
 
+# Create a index route
+@app.get("/")
+def index():
+    return {"result": "Hello 🔥"}
+    
 # Create a route to read items
 @app.get("/items/{item_id}")
 async def read_item(item_id: int):
@@ -43,4 +48,4 @@ def write_data_to_db(data):
         json.dump(data, file, indent=2)
 
 # Run the application with uvicorn
-# Example: uvicorn filename:app --reload
+# Example: uvicorn main:app --reload
