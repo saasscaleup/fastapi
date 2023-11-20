@@ -24,7 +24,7 @@ cd fastapi
 
 Install [Fastapi](https://fastapi.tiangolo.com/) packages.
 ```
-pip install fastapi uvicron
+pip install fastapi uvicorn
 ```
 
 ## Run FastAPI locally
