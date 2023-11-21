@@ -19,18 +19,20 @@ git clone https://github.com/saasscaleup/fastapi.git
 cd fastapi
 ```
 
-### Step 2 - Install required packages.
-
-
-Install [Fastapi](https://fastapi.tiangolo.com/) packages.
 ```
-pip install fastapi uvicorn
+git checkout fastapi-docker
 ```
 
-## Run FastAPI locally
+### Step 2 - Docker Build
 
 ```
-uvicorn main:app --reload
+docker build -t fastapi-docker-image .
+```
+
+## Step 3 - Docker run
+
+```
+docker run -dp 8080:80 -v mydata:/code/data fastapi-docker-image
 ```
 
 ## Support 🙏😃
