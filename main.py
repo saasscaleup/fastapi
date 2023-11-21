@@ -5,7 +5,7 @@ import json
 app = FastAPI()
 
 # Example JSON database file
-DATABASE_FILE = "data.json"
+DATABASE_FILE = "data/data.json"
 
 # Define a Pydantic model for your data
 class Item(BaseModel):
@@ -23,15 +23,16 @@ async def read_item(item_id: int):
     items = read_data_from_db()
     if item_id < 0 or item_id >= len(items):
         raise HTTPException(status_code=404, detail="Item not found")
-    return items[item_id]
+    return {"result": items[item_id]}
 
 # Create a route to create items
 @app.post("/items/")
 async def create_item(item: Item):
+    print(item)
     items = read_data_from_db()
-    items.append(item.model_dump())
+    items.append(item.dict())
     write_data_to_db(items)
-    return item
+    return {"result": item}
 
 # Helper function to read data from the JSON database
 def read_data_from_db():
@@ -39,6 +40,7 @@ def read_data_from_db():
         with open(DATABASE_FILE, "r") as file:
             data = json.load(file)
     except FileNotFoundError:
+        print("database file not found")
         data = []
     return data
 
