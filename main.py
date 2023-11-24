@@ -5,7 +5,7 @@ import json
 app = FastAPI()
 
 # Example JSON database file
-DATABASE_FILE = "data/data.json"
+DATABASE_FILE = "data.json"
 
 # Define a Pydantic model for your data
 class Item(BaseModel):
